@@ -15,7 +15,7 @@ void InputCoeffs (double coeffs[], int NOP)
     }
 }
 
-void PrintRoots (double roots[], int NumbOfSolutions)
+void PrintRoots (double roots[], double complroots[][], int NumbOfSolutions)
 {
     switch (NumbOfSolutions)
     {
@@ -29,6 +29,10 @@ void PrintRoots (double roots[], int NumbOfSolutions)
         case TWO: printf ("x1 = %lg\n", roots[0]);
                   printf ("x2 = %lg\n", roots[1]);
                   break;
+
+        case COMPL: printf ("x1 = %lg - %lg * i\n", complroots[0][0], complroots[0][1]);
+                    printf ("x2 = %lg + %lg * i\n", complroots[1][0], complroots[1][1]);
+                    break;
 
         case MANY_SOL: printf ("Any number is a solution\n");
                        break;

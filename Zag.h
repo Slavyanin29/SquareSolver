@@ -10,7 +10,8 @@ enum NumberOfRoots
     ZERO = 0,
     ONE = 1,
     TWO = 2,
-    MANY_SOL = 3
+    COMPL = 3,
+    MANY_SOL = 4,
 };
 
 struct TestData
@@ -20,8 +21,8 @@ struct TestData
 };
 
 int IsZero (double x);
-int SquareSolver (double coeffs[], double roots[]);
+int SquareSolver (double coeffs[], double roots[], double complroots[]);
 void InputCoeffs (double coeffs[], int NOP);
-void PrintRoots (double roots[], int NumbOfSolutions);
+void PrintRoots (double roots[], double complroots[], int NumbOfSolutions);
 int TestOne (const TestData* allData);
 void TestAll ();

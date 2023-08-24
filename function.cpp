@@ -3,7 +3,7 @@ int IsZero (double x)
     return (fabs (x) < 1e-6);
 }
 
-int SquareSolver (double coeffs[], double roots[])
+int SquareSolver (double coeffs[], double roots[], double complroots[])
 {
 
     double a = coeffs[0], b = coeffs[1], c = coeffs[2];
@@ -22,11 +22,17 @@ int SquareSolver (double coeffs[], double roots[])
     }
     else
     {
-        double D = b * b - 4 * a * c;
+        double D = b * b - 4 * a * c, d = sqrt(fabs(D));
 
         if (D < 0)
         {
-            return ZERO;
+            // x1 = -b/2a - (d/2a)*i
+            // x2 = -b/2a + (d/2a)*i
+            complroots[0][0] = -b / 2*a;
+            complroots[0][1] = -d / 2*a;
+            complroots[1][0] = -b / 2*a;
+            complroots[1][1] =  d / 2*a;
+            return COMPL;
         }
         else if (IsZero (D))
         {
@@ -35,7 +41,6 @@ int SquareSolver (double coeffs[], double roots[])
         }
         else
         {
-            double d = sqrt (D);
             roots[0] = (IsZero (-b - d))? 0 : (-b - d) / (2 * a);
             roots[1] = (IsZero (-b + d))? 0 : (-b + d) / (2 * a);
             return TWO;
