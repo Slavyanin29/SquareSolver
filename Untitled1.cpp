@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <math.h>
+//#define NDEBUG
+//#include <assert.h>
 
 enum InfEquation
 {
+    nTests = 6, //Number of Tests
     MA = 2, //Maximum Answers
     NOP = 3 //Number of Parameters
 };
@@ -15,12 +18,18 @@ enum NumberOfRoots
     MANY_SOL = 3
 };
 
+struct TestData
+{
+    double a, b, c;
+    double x1, x2;
+};
+
 int IsZero (double x);
 int SquareSolver (double coeffs[], double roots[]);
-int InputCoeffs (double coeffs[], int NOP);
-int PrintRoots (double roots[], int NumbOfSolutions);
-int TestOne (double a, double b, double c, double x1ref, double x2ref);
-int TestAll ();
+void InputCoeffs (double coeffs[], int NOP);
+void PrintRoots (double roots[], int NumbOfSolutions);
+int TestOne (const TestData* allData);
+void TestAll ();
 
 int main()
 {
@@ -42,7 +51,7 @@ int main()
 
 }
 
-int InputCoeffs (double coeffs[], int NOP)
+void InputCoeffs (double coeffs[], int NOP)
 {
     int i=0;
 
@@ -57,7 +66,6 @@ int InputCoeffs (double coeffs[], int NOP)
         else
             i++;
     }
-    return 0;
 }
 
 int IsZero (double x)
@@ -105,7 +113,7 @@ int SquareSolver (double coeffs[], double roots[])
     }
 }
 
-int PrintRoots(double roots[], int NumbOfSolutions)
+void PrintRoots (double roots[], int NumbOfSolutions)
 {
     switch (NumbOfSolutions)
     {
@@ -126,33 +134,34 @@ int PrintRoots(double roots[], int NumbOfSolutions)
         default: printf ("# Error!!! Solutions = %d", NumbOfSolutions);
 
     }
-    return 0;
 }
 
-int TestOne(double a, double b, double c, double x1ref, double x2ref)
+int TestOne (const TestData* allData)
 {
     double rootst[MA] = {}, coeffst[NOP] = {};
-    coeffst[0] = a;
-    coeffst[1] = b;
-    coeffst[2] = c;
+    coeffst[0] = allData -> a;
+    coeffst[1] = allData -> b;
+    coeffst[2] = allData -> c;
 
     SquareSolver (coeffst, rootst);
 
-    return ( (IsZero (rootst[0] - x1ref) && IsZero (rootst[1] - x2ref)) || (IsZero (rootst[1] - x1ref) && IsZero (rootst[0] - x2ref) ) );
+    return ( (IsZero (rootst[0] - (allData -> x1)) && IsZero (rootst[1] - (allData -> x2))) || (IsZero (rootst[1] - (allData -> x1)) && IsZero (rootst[0] - (allData -> x2)) ) );
 }
 
-int TestAll()
+void TestAll()
 {
+    TestData allData[nTests] = {{ 0, 0, 0, 0, 0},
+                                { 1, 0, -4, -2, 2},
+                                { 1, 2, 1, -1, -1},
+                                { 6, -24, 0, 0, 4},
+                                { 1, -24, 0, 0, 24},
+                                { 0.1, 0, -10, 10, -10}};
+
     int nOk = 0;
 
-    nOk += TestOne( 1, 0, -4, -2, 2);
-    nOk += TestOne( 1, 2, 1, -1, -1);
-    nOk += TestOne( 1, -24, 0, 0, 24);
-    nOk += TestOne( 6, -24, 0, 0, 4);
-    nOk += TestOne( 0.1, 0, -10, 10, -10);
-    nOk += TestOne( 0, 0, 0, 0, 0);
+    for (int i = 0; i < nTests; i++)
+        nOk += TestOne(&allData[i]);
 
-    (nOk == 6)? printf("# Test - Ok.\n") : printf("# Error...\n");
+    (nOk == nTests)? printf("# Test - Ok.\n") : printf("# Error...\n");
 
-    return 0;
 }
