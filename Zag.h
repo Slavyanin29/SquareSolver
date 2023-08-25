@@ -21,8 +21,9 @@ struct TestData
 };
 
 int IsZero (double x);
-int SquareSolver (double coeffs[], double roots[], double complroots[]);
+int SquareSolver (double coeffs[], double roots[]);
 void InputCoeffs (double coeffs[], int NOP);
-void PrintRoots (double roots[], double complroots[], int NumbOfSolutions);
+void ComplPrint (double roots[]);
+void PrintRoots (double roots[], int NumbOfSolutions);
 int TestOne (const TestData* allData);
 void TestAll ();

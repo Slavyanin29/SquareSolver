@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <ctype.h>
 //#include <complex.h>
 #include "Zag.h"
 #include "InOutData.cpp"
@@ -14,7 +15,7 @@ int main()
     printf ("# This program solves square equation: a*x^2+b*x+c=0\n");
     printf ("# Enter a, b, c: \n");
 
-    double coeffs[NOP] = {}, roots[MA] = {}, complroots[MA][MA] = {{}{}};
+    double coeffs[NOP] = {}, roots[MA] = {};
 
     TestAll();
 
@@ -22,8 +23,8 @@ int main()
 
     printf ("# Answer:\n");
 
-    int NumbOfSolutions = SquareSolver (coeffs, roots, complroots);
+    int NumbOfSolutions = SquareSolver (coeffs, roots);
 
-    PrintRoots(roots, croots, NumbOfSolutions);
+    PrintRoots(roots, NumbOfSolutions);
 
 }

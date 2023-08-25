@@ -1,11 +1,11 @@
 int TestOne (const TestData* allData)
 {
-    double rootst[MA] = {}, coeffst[NOP] = {}, crootst[MA][MA] = {{},{}};
+    double rootst[MA] = {}, coeffst[NOP] = {};
     coeffst[0] = allData -> a;
     coeffst[1] = allData -> b;
     coeffst[2] = allData -> c;
 
-    SquareSolver (coeffst, rootst, crootst);
+    SquareSolver (coeffst, rootst);
 
     return ( (IsZero (rootst[0] - (allData -> x1)) && IsZero (rootst[1] - (allData -> x2))) || (IsZero (rootst[1] - (allData -> x1)) && IsZero (rootst[0] - (allData -> x2)) ) );
 }

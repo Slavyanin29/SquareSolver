@@ -15,7 +15,7 @@ void InputCoeffs (double coeffs[], int NOP)
     }
 }
 
-void PrintRoots (double roots[], double complroots[][], int NumbOfSolutions)
+void PrintRoots (double roots[], int NumbOfSolutions)
 {
     switch (NumbOfSolutions)
     {
@@ -30,8 +30,7 @@ void PrintRoots (double roots[], double complroots[][], int NumbOfSolutions)
                   printf ("x2 = %lg\n", roots[1]);
                   break;
 
-        case COMPL: printf ("x1 = %lg - %lg * i\n", complroots[0][0], complroots[0][1]);
-                    printf ("x2 = %lg + %lg * i\n", complroots[1][0], complroots[1][1]);
+        case COMPL: ComplPrint (roots);
                     break;
 
         case MANY_SOL: printf ("Any number is a solution\n");
@@ -39,5 +38,29 @@ void PrintRoots (double roots[], double complroots[][], int NumbOfSolutions)
 
         default: printf ("# Error!!! Solutions = %d", NumbOfSolutions);
 
+    }
+
+    printf ("# Thanks for using this program!     ^   ^ \n");
+    printf ("#                                   (='I'=)\n");
+}
+
+void ComplPrint (double roots[])
+{
+    printf ("# The answer is a complex number.\n# Press Enter to leave the program. Press any other button to see the answer.\n");
+
+    int ch = getchar();
+
+    if ((ch = getchar()) != '\n')
+    {
+            if (IsZero(roots[0]))
+            {
+                printf ("x1 = %lg * i\n", roots[1]);
+                printf ("x2 = - %lg * i\n", roots[1]);
+            }
+            else
+            {
+                printf ("x1 = %lg - %lg * i\n", roots[0], roots[1]);
+                printf ("x2 = %lg + %lg * i\n", roots[0], roots[1]);
+            }
     }
 }
