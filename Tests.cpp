@@ -27,3 +27,9 @@ void TestAll()
     (nOk == nTests)? printf("# Test - Ok.\n") : printf("# Error...\n");
 
 }
+
+/*   /\___/\
+    / 0   0 \
+   (  ==I==  )
+    \_______/
+*/

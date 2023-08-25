@@ -4,7 +4,7 @@ void InputCoeffs (double coeffs[], int NOP)
 
     while (i<NOP)
     {
-        if (scanf("%lg", &coeffs[i])!=1)
+        if (scanf("%lg", &coeffs[i])!=1 || (i==2 && isgraph(getchar())))
         {
             printf("# Wrong input!!! Try again...\n");
             rewind(stdin);
@@ -46,11 +46,11 @@ void PrintRoots (double roots[], int NumbOfSolutions)
 
 void ComplPrint (double roots[])
 {
-    printf ("# The answer is a complex number.\n# Press Enter to leave the program. Press any other button to see the answer.\n");
+    printf ("# The answer is a complex number.\n# Press Enter to leave the program. Type in any symbol to see the answer.\n");
 
-    int ch = getchar();
+    rewind(stdin);
 
-    if ((ch = getchar()) != '\n')
+    if (getchar() != '\n')
     {
             if (IsZero(roots[0]))
             {

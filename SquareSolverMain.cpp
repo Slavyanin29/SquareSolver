@@ -12,11 +12,12 @@ int main()
 {
 
     printf ("# This program solves square equation: a*x^2+b*x+c=0\n");
+
+    TestAll();
+
     printf ("# Enter a, b, c: \n");
 
     double coeffs[NOP] = {}, roots[MA] = {};
-
-    TestAll();
 
     InputCoeffs(coeffs, NOP);
 
@@ -27,3 +28,6 @@ int main()
     PrintRoots(roots, NumbOfSolutions);
 
 }
+
+//   ^___^
+//  ('=I=')
